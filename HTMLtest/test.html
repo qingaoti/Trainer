@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./echarts/echarts_3.6.2.min.js"></script>
+
+    <!-- build:js(./public) /scripts/chartwrapper.js -->
+    <script type="text/javascript" src="./echartwrapper.js"></script>
+    <script type="text/javascript" src="./historyReport.js"></script>
+    <script type="text/javascript" src="./pieReport.js"></script>
+    <script type="text/javascript" src="./salesReport.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body{
+            font-family: "微软雅黑"
+        }
+
+        .item{
+            margin:auto;
+            width:98%;
+        }
+
+        .historyChart{
+            height:300px;
+        }
+
+        .pieChart{
+            height:510px;
+        }
+
+        .salesChart{
+            height:550px;
+        }
+
+        .txtCenter{
+            text-align: center;
+        }
+
+
+        h5{
+            padding: 1rem 0rem 0.25rem 1.5rem;
+            margin:0px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        table{
+            width:90%;
+            border-collapse:collapse;
+            font-size: .75rem;
+            margin:auto auto 20px auto;
+        }
+
+        th,td{
+            border:solid 1px #dddddd;
+            text-align: center;
+            padding: 8px 0px;
+        }
+
+        tr:nth-of-type(odd) td{
+            background-color: #f8f8f8;
+        }
+
+        .whiteback{
+            background-color: white;
+        }
+
+        .ofhidden{
+            overflow: hidden;
+        }
+
+    </style>
+    <script type="text/javascript">
+        window.onload=function(){
+            var _data = {
+                "keys": [
+                    "2016/01",
+                    "2016/02",
+                    "2016/03",
+                    "2016/04",
+                    "2016/05",
+                    "2016/06",
+                    "2016/07",
+                    "2016/08",
+                    "2016/09",
+                    "2016/10",
+                    "2016/11",
+                    "2016/12",
+                    "2017/01",
+                    "2017/02",
+                    "2017/03",
+                    "2017/04",
+                    "2017/05",
+                    "2017/06",
+                    "2017/07"
+                ],
+                "list": [
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 6
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 3
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/01"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 2
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 2
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/02"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 27
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 10
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/03"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 6
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 6
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/04"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 2
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 1
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/05"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 1
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 1
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/06"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 37
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 16
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/07"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 7
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 1
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/08"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 53
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 14
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/09"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 3
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/10"
+                    },
+                    {
+                        "key": "2016/11",
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 0
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        }
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 2
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2016/12"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 20
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 2
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/01"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 1
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/02"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 9
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 4
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/03"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 2
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/04"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 6
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/05"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 13
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 0
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 0
+                        },
+                        "key": "2017/06"
+                    },
+                    {
+                        "pv": {
+                            "txt": "浏览量",
+                            "val": 0
+                        },
+                        "share": {
+                            "txt": "分享数",
+                            "val": 0
+                        },
+                        "reg": {
+                            "txt": "报名数",
+                            "val": 12
+                        },
+                        "pay": {
+                            "txt": "支付数",
+                            "val": 3
+                        },
+                        "deal": {
+                            "txt": "成交数",
+                            "val": 1
+                        },
+                        "key": "2017/07"
+                    }
+                ]
+            };
+            var _percent = [
+                {
+                    "pv": {
+                        "0": 0
+                    },
+                    "share": {
+                        "0": 0
+                    },
+                    "reg": {
+                        "0": 6
+                    },
+                    "pay": {
+                        "0": 3
+                    },
+                    "deal": {
+                        "0": 0
+                    },
+                    "key": "2016/01"
+                },
+                {
+                    "pv": {
+                        "0": 0
+                    },
+                    "share": {
+                        "0": 0
+                    },
+                    "reg": {
+                        "0": 2
+                    },
+                    "pay": {
+                        "0": 2
+                    },
+                    "deal": {
+                        "0": 0
+                    },
+                    "key": "2016/02"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "reg": {
+                        "0": 14,
+                        "1": 13
+                    },
+                    "pay": {
+                        "0": 10,
+                        "1": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "key": "2016/03"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "reg": {
+                        "0": 4,
+                        "1": 2
+                    },
+                    "pay": {
+                        "0": 4,
+                        "1": 2
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "key": "2016/04"
+                },
+                {
+                    "pv": {
+                        "0": 0
+                    },
+                    "share": {
+                        "0": 0
+                    },
+                    "reg": {
+                        "0": 2
+                    },
+                    "pay": {
+                        "0": 1
+                    },
+                    "deal": {
+                        "0": 0
+                    },
+                    "key": "2016/05"
+                },
+                {
+                    "pv": {
+                        "0": 0
+                    },
+                    "share": {
+                        "0": 0
+                    },
+                    "reg": {
+                        "0": 1
+                    },
+                    "pay": {
+                        "0": 1
+                    },
+                    "deal": {
+                        "0": 0
+                    },
+                    "key": "2016/06"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0
+                    },
+                    "reg": {
+                        "0": 21,
+                        "1": 6,
+                        "2": 10
+                    },
+                    "pay": {
+                        "0": 9,
+                        "1": 0,
+                        "2": 7
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0
+                    },
+                    "key": "2016/07"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "reg": {
+                        "0": 5,
+                        "1": 2
+                    },
+                    "pay": {
+                        "0": 1,
+                        "1": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "key": "2016/08"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "reg": {
+                        "0": 28,
+                        "1": 25
+                    },
+                    "pay": {
+                        "0": 14,
+                        "1": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "key": "2016/09"
+                },
+                {
+                    "pv": {
+                        "1": 0,
+                        "3": 0
+                    },
+                    "share": {
+                        "1": 0,
+                        "3": 0
+                    },
+                    "reg": {
+                        "1": 1,
+                        "3": 2
+                    },
+                    "pay": {
+                        "1": 0,
+                        "3": 0
+                    },
+                    "deal": {
+                        "1": 0,
+                        "3": 0
+                    },
+                    "key": "2016/10"
+                },
+                {
+                    "pv": {
+                        "1": 0
+                    },
+                    "share": {
+                        "1": 0
+                    },
+                    "reg": {
+                        "1": 2
+                    },
+                    "pay": {
+                        "1": 0
+                    },
+                    "deal": {
+                        "1": 0
+                    },
+                    "key": "2016/12"
+                },
+                {
+                    "pv": {
+                        "1": 0,
+                        "2": 0
+                    },
+                    "share": {
+                        "1": 0,
+                        "2": 0
+                    },
+                    "reg": {
+                        "1": 6,
+                        "2": 14
+                    },
+                    "pay": {
+                        "1": 1,
+                        "2": 1
+                    },
+                    "deal": {
+                        "1": 0,
+                        "2": 0
+                    },
+                    "key": "2017/01"
+                },
+                {
+                    "pv": {
+                        "1": 0
+                    },
+                    "share": {
+                        "1": 0
+                    },
+                    "reg": {
+                        "1": 1
+                    },
+                    "pay": {
+                        "1": 0
+                    },
+                    "deal": {
+                        "1": 0
+                    },
+                    "key": "2017/02"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "reg": {
+                        "0": 4,
+                        "1": 3,
+                        "2": 1,
+                        "3": 1
+                    },
+                    "pay": {
+                        "0": 4,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "key": "2017/03"
+                },
+                {
+                    "pv": {
+                        "1": 0
+                    },
+                    "share": {
+                        "1": 0
+                    },
+                    "reg": {
+                        "1": 2
+                    },
+                    "pay": {
+                        "1": 0
+                    },
+                    "deal": {
+                        "1": 0
+                    },
+                    "key": "2017/04"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "reg": {
+                        "0": 3,
+                        "1": 1,
+                        "2": 1,
+                        "3": 1
+                    },
+                    "pay": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0,
+                        "2": 0,
+                        "3": 0
+                    },
+                    "key": "2017/05"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "reg": {
+                        "0": 8,
+                        "1": 5
+                    },
+                    "pay": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0
+                    },
+                    "key": "2017/06"
+                },
+                {
+                    "pv": {
+                        "0": 0,
+                        "1": 0,
+                        "3": 0
+                    },
+                    "share": {
+                        "0": 0,
+                        "1": 0,
+                        "3": 0
+                    },
+                    "reg": {
+                        "0": 8,
+                        "1": 1,
+                        "3": 3
+                    },
+                    "pay": {
+                        "0": 1,
+                        "1": 0,
+                        "3": 2
+                    },
+                    "deal": {
+                        "0": 0,
+                        "1": 0,
+                        "3": 1
+                    },
+                    "key": "2017/07"
+                }
+            ];
+            var _salesSum = [
+                {
+                    "key": "2015/12",
+                    "members": {
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 6,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 23,
+                            "pay": 11,
+                            "deal": 1,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "56679a6084c63a2d065a7cb4": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "陈文婷",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2016/01",
+                    "members": {
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 38,
+                            "pay": 22,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 44,
+                            "pay": 11,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2016/02",
+                    "members": {
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 17,
+                            "pay": 11,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 8,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        },
+                        "56d04a8bd6c18e277da00e82": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "熊伟",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2016/03",
+                    "members": {
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        },
+                        "56f15b02d5ca6d2f43a748dd": {
+                            "reg": 14,
+                            "pay": 11,
+                            "deal": 0,
+                            "rname": "张珩",
+                            "status": 1
+                        },
+                        "55fbeb4744bd9090708b4567": {
+                            "reg": 13,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "",
+                            "status": -1
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "56679a6084c63a2d065a7cb4": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 1,
+                            "rname": "陈文婷",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "568e039040ce717f3f664f93": {
+                            "reg": 3,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "陈才智",
+                            "status": 0
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "56d04a8bd6c18e277da00e82": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "熊伟",
+                            "status": 0
+                        },
+                        "56d7c7f94ab134443d10c3cb": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "宇航",
+                            "status": 0
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 17,
+                            "pay": 5,
+                            "deal": 1,
+                            "rname": "韩基永",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/04",
+                    "members": {
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 3,
+                            "pay": 2,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "56f8d2032dc620735a716f15": {
+                            "reg": 7,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘敏世",
+                            "status": 0
+                        },
+                        "56f0bc622f028a1143f6a0d0": {
+                            "reg": 4,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "晏传卓",
+                            "status": 0
+                        },
+                        "55fbeb4744bd9090708b4567": {
+                            "reg": 4,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "",
+                            "status": -1
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 11,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "5670f993a2f5dbf12e73b763": {
+                            "reg": 15,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄强",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 34,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "56f15b02d5ca6d2f43a748dd": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "张珩",
+                            "status": 1
+                        },
+                        "56679a6084c63a2d065a7cb4": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "陈文婷",
+                            "status": 0
+                        },
+                        "568e039040ce717f3f664f93": {
+                            "reg": 11,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "陈才智",
+                            "status": 0
+                        },
+                        "56df8fa22bf55f60795d8064": {
+                            "reg": 0,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "李蕾",
+                            "status": 0
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 7,
+                            "pay": 4,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "56711b5ba2f5dbf12e73b765": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡婉",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/05",
+                    "members": {
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 13,
+                            "pay": 3,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 0,
+                            "pay": 0,
+                            "deal": 1,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "56f0bc622f028a1143f6a0d0": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "晏传卓",
+                            "status": 0
+                        },
+                        "56df8fa22bf55f60795d8064": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "李蕾",
+                            "status": 0
+                        },
+                        "56f8d2032dc620735a716f15": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘敏世",
+                            "status": 0
+                        },
+                        "55fbeb4744bd9090708b4567": {
+                            "reg": 19,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "",
+                            "status": -1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/06",
+                    "members": {
+                        "56df8fa22bf55f60795d8064": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "李蕾",
+                            "status": 0
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 9,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "55fbeb4744bd9090708b4567": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "",
+                            "status": -1
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 2,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 8,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 11,
+                            "pay": 7,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "5670f993a2f5dbf12e73b763": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄强",
+                            "status": 0
+                        },
+                        "574e8477e20691c83fcf8482": {
+                            "reg": 5,
+                            "pay": 3,
+                            "deal": 0,
+                            "rname": "郑莹",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2016/07",
+                    "members": {
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 20,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "55fbeb4744bd9090708b4567": {
+                            "reg": 4,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "",
+                            "status": -1
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 3,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "56711b5ba2f5dbf12e73b765": {
+                            "reg": 2,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "胡婉",
+                            "status": 1
+                        },
+                        "5784801b6fa486e81c9fa2a7": {
+                            "reg": 6,
+                            "pay": 5,
+                            "deal": 0,
+                            "rname": "严寒",
+                            "status": 1
+                        },
+                        "576c9ac75a979da42ebfb3d8": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "吴玉玲",
+                            "status": 0
+                        },
+                        "5670f993a2f5dbf12e73b763": {
+                            "reg": 17,
+                            "pay": 5,
+                            "deal": 0,
+                            "rname": "黄强",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 15,
+                            "pay": 4,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "572054bfff0059ef04ed89ec": {
+                            "reg": 2,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "范晓玲",
+                            "status": 0
+                        },
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "570f08a38d11083e42030de0": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "张锋",
+                            "status": 1
+                        },
+                        "572f1b723a4803e13c5734f1": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘伟",
+                            "status": 1
+                        },
+                        "5729efe984a215c32d351d8c": {
+                            "reg": 4,
+                            "pay": 2,
+                            "deal": 0,
+                            "rname": "周敏",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 29,
+                            "pay": 11,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/08",
+                    "members": {
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "5784801b6fa486e81c9fa2a7": {
+                            "reg": 22,
+                            "pay": 10,
+                            "deal": 0,
+                            "rname": "严寒",
+                            "status": 1
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 5,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "579eb5a8896e25330ccd50b3": {
+                            "reg": 25,
+                            "pay": 18,
+                            "deal": 0,
+                            "rname": "刘浩东",
+                            "status": 1
+                        },
+                        "578ddf31e7d33ba04657efa4": {
+                            "reg": 6,
+                            "pay": 3,
+                            "deal": 0,
+                            "rname": "付屾",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 5,
+                            "pay": 2,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "57626a099cc6786d0fc92f1f": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡奇",
+                            "status": 0
+                        },
+                        "56654f330ab7e8c903ff7c40": {
+                            "reg": 6,
+                            "pay": 3,
+                            "deal": 0,
+                            "rname": "许昌",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/09",
+                    "members": {
+                        "57e0b00b1083fb82362746ad": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "周涛",
+                            "status": 0
+                        },
+                        "57eb18e01083fb8236274b41": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "段标标",
+                            "status": 0
+                        },
+                        "568dbf9c40ce717f3f664f83": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "杜龙（超级销售顾问）",
+                            "status": 0
+                        },
+                        "57626a099cc6786d0fc92f1f": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡奇",
+                            "status": 0
+                        },
+                        "5670f993a2f5dbf12e73b763": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄强",
+                            "status": 0
+                        },
+                        "56dfd4e02c10cefe7e8b6b62": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "测试销售总监",
+                            "status": 0
+                        },
+                        "578ddf31e7d33ba04657efa4": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "付屾",
+                            "status": 0
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "576c9a608a5c29ae2e384fa3": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "张倩",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "579f0d0cdf118b2c0e69ea54": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "郑",
+                            "status": 0
+                        },
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 5,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "577dba2273f7f00a7d0622d7": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "李宇哲",
+                            "status": 0
+                        },
+                        "579eb5a8896e25330ccd50b3": {
+                            "reg": 19,
+                            "pay": 8,
+                            "deal": 0,
+                            "rname": "刘浩东",
+                            "status": 1
+                        },
+                        "5784801b6fa486e81c9fa2a7": {
+                            "reg": 74,
+                            "pay": 11,
+                            "deal": 0,
+                            "rname": "严寒",
+                            "status": 1
+                        },
+                        "576c9ac75a979da42ebfb3d8": {
+                            "reg": 4,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "吴玉玲",
+                            "status": 0
+                        },
+                        "57e393001083fb82362748a1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "冯欢",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2016/10",
+                    "members": {
+                        "5673c8f5b2e483d4423d63b4": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁建熊",
+                            "status": 0
+                        },
+                        "580581f32f2a223367340ac1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "朱世光",
+                            "status": 0
+                        },
+                        "5670f993a2f5dbf12e73b763": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄强",
+                            "status": 0
+                        },
+                        "578ddf31e7d33ba04657efa4": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "付屾",
+                            "status": 0
+                        },
+                        "56f252fa44babf2543448b25": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "吴堃",
+                            "status": 1
+                        },
+                        "57e0b00b1083fb82362746ad": {
+                            "reg": 5,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "周涛",
+                            "status": 0
+                        },
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "579eb5a8896e25330ccd50b3": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘浩东",
+                            "status": 1
+                        },
+                        "57eb18e01083fb8236274b41": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "段标标",
+                            "status": 0
+                        },
+                        "576c9ac75a979da42ebfb3d8": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "吴玉玲",
+                            "status": 0
+                        },
+                        "5721b9508a65a3e50401d6f2": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "陈东辉",
+                            "status": 1
+                        },
+                        "5784801b6fa486e81c9fa2a7": {
+                            "reg": 18,
+                            "pay": 2,
+                            "deal": 0,
+                            "rname": "严寒",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/11",
+                    "members": {
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2016/12",
+                    "members": {
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        },
+                        "570dd12f519b414a380183e1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "唐慧丽",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2017/01",
+                    "members": {
+                        "57e0b00b1083fb82362746ad": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "周涛",
+                            "status": 0
+                        },
+                        "57eb18e01083fb8236274b41": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "段标标",
+                            "status": 0
+                        },
+                        "570dd12f519b414a380183e1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "唐慧丽",
+                            "status": 0
+                        },
+                        "576c9b3f5a979da42ebfb3f6": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "唐雪妮",
+                            "status": 0
+                        },
+                        "5812f4693eede59469bdea8e": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "周旭阳",
+                            "status": 0
+                        },
+                        "580580de6977761a638df3fe": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "秦高梯",
+                            "status": 1
+                        },
+                        "56db9f19c48c5b1a47c9234c": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡聪",
+                            "status": 0
+                        },
+                        "5721b9508a65a3e50401d6f2": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "陈东辉",
+                            "status": 1
+                        },
+                        "580581152f2a223367340abd": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "方圆",
+                            "status": 0
+                        },
+                        "566685b229fc19460ee6dac9": {
+                            "reg": 2,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "余然",
+                            "status": 0
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 3,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "582131bb1024813f6085b888": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁宝童",
+                            "status": 0
+                        },
+                        "579eb5a8896e25330ccd50b3": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘浩东",
+                            "status": 1
+                        },
+                        "576c9ac75a979da42ebfb3d8": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "吴玉玲",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2017/02",
+                    "members": {
+                        "580581f32f2a223367340ac1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "朱世光",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2017/03",
+                    "members": {
+                        "580580d76977761a638df3fd": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "皮威",
+                            "status": 1
+                        },
+                        "58bd203bf2f0379c08cbaf12": {
+                            "reg": 5,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "刘建学",
+                            "status": 0
+                        },
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 1,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/04",
+                    "members": {
+                        "5721b9508a65a3e50401d6f2": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "陈东辉",
+                            "status": 1
+                        },
+                        "578469df52b428f21c8b79f1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "罗伟",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/05",
+                    "members": {
+                        "56db9f19c48c5b1a47c9234c": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡聪",
+                            "status": 0
+                        },
+                        "5923996383ddcfcc41c9dfc1": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄晓龙",
+                            "status": 1
+                        },
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 6,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "580580d76977761a638df3fd": {
+                            "reg": 2,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "皮威",
+                            "status": 1
+                        },
+                        "56f252fa44babf2543448b25": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "吴堃",
+                            "status": 1
+                        },
+                        "578469df52b428f21c8b79f1": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "罗伟",
+                            "status": 1
+                        },
+                        "5784801b6fa486e81c9fa2a7": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "严寒",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/06",
+                    "members": {
+                        "56654f330ab7e8c903ff7c40": {
+                            "reg": 7,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "许昌",
+                            "status": 1
+                        },
+                        "580580d76977761a638df3fd": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "皮威",
+                            "status": 1
+                        },
+                        "582131bb1024813f6085b888": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "袁宝童",
+                            "status": 0
+                        },
+                        "59083edb36c49883774f9c49": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "杨秋宇",
+                            "status": 0
+                        },
+                        "570f3d44a4c41a5242869c32": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "罗婷",
+                            "status": 0
+                        }
+                    }
+                },
+                {
+                    "key": "2017/07",
+                    "members": {
+                        "56f8c06666d6ae7d5ad99665": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩庆芳",
+                            "status": 1
+                        },
+                        "56654f330ab7e8c903ff7c40": {
+                            "reg": 2,
+                            "pay": 2,
+                            "deal": 1,
+                            "rname": "许昌",
+                            "status": 1
+                        },
+                        "593f3d95d39760cd69dd148d": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "徐海波",
+                            "status": 1
+                        },
+                        "580580de6977761a638df3fe": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "秦高梯",
+                            "status": 1
+                        },
+                        "56711b5ba2f5dbf12e73b765": {
+                            "reg": 4,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "胡婉",
+                            "status": 1
+                        },
+                        "576c9a608a5c29ae2e384fa3": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "张倩",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/08",
+                    "members": {
+                        "5982b2e0025af3e5095b96f6": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "甘萌",
+                            "status": 1
+                        },
+                        "579eb5a8896e25330ccd50b3": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "刘浩东",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/09",
+                    "members": {
+                        "58ae714f25f4fef16783ef88": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄宇",
+                            "status": 1
+                        },
+                        "56f252fa44babf2543448b25": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "吴堃",
+                            "status": 1
+                        },
+                        "56d94aec4fdc2cef452c10ad": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "马文超",
+                            "status": 1
+                        },
+                        "57e4867b1083fb82362748ce": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "熊星",
+                            "status": 1
+                        },
+                        "56654ee90ab7e8c903ff7c3e": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "韩基永",
+                            "status": 1
+                        },
+                        "580580d76977761a638df3fd": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "皮威",
+                            "status": 1
+                        },
+                        "576c9a608a5c29ae2e384fa3": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "张倩",
+                            "status": 1
+                        },
+                        "59473133d39760cd69dd19d7": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "唐星龙",
+                            "status": 1
+                        },
+                        "57ce3aa9911955ae6d732aa6": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "孙兵",
+                            "status": 1
+                        },
+                        "580580de6977761a638df3fe": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "秦高梯",
+                            "status": 1
+                        }
+                    }
+                },
+                {
+                    "key": "2017/10",
+                    "members": {
+                        "5923996383ddcfcc41c9dfc1": {
+                            "reg": 3,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "黄晓龙",
+                            "status": 1
+                        },
+                        "56654f330ab7e8c903ff7c40": {
+                            "reg": 1,
+                            "pay": 0,
+                            "deal": 0,
+                            "rname": "许昌",
+                            "status": 1
+                        }
+                    }
+                }
+            ];
+            var _his = new hisChart(_data,'history','historyData');
+            _his.paint();
+            var _rangeData = _his.getRangeData();
+            _his.toTable('/activity/mct/report/month',_rangeData.start,_rangeData.end);
+            // var _range = _his.getRange();
+            var _pie = new pieChart(_percent,'pie','pieData');
+            var _sales = new salesChart(_salesSum,'employee','salesData');
+            _pie.paint(_rangeData.start,_rangeData.end);
+            _pie.toTable(_rangeData.start,_rangeData.end);
+            _sales.paint(_rangeData.start,_rangeData.end);
+            _sales.toTable(_rangeData.start,_rangeData.end);
+
+            _his.onDataZoom(function(params){
+                var _const = (_data.list.length-1)/100;
+                var _start = Math.round(_const*params.start);
+                var _end = Math.round(_const*params.end);
+                var _rangeData = _his.getRangeData(_start,_end);
+                _his.toTable('/activity/mct/report/month',_rangeData.start,_rangeData.end);
+                _pie.paint(_rangeData.start,_rangeData.end);
+                _pie.toTable(_rangeData.start,_rangeData.end);
+                _sales.paint(_rangeData.start,_rangeData.end);
+                _sales.toTable(_rangeData.start,_rangeData.end);
+            });
+
+            debugger;
+            $('#myTab a:last').tab('show'); //初始化显示哪个tab
+
+
+            $('#myTab a').click(function(e) {
+                e.preventDefault(); //阻止a链接的跳转行为
+                $(this).tab('show'); //显示当前选中的链接及关联的content
+            });
+        };
+
+
+
+
+
+        // var _data = (new FakeData()).allData();
+        // var helper = new ChartHelper('main','data');
+        // helper.allData(_data,_percent);
+        // var opt = helper.getOption();
+        // var _url = '/activity/mct/report/month';
+        // helper.renderGridWithDrill(_data.list,opt.dataZoom[0].startValue,(_data.list,opt.dataZoom[0].endValue+1),_url);
+        // helper.onDataZoom(function(params){
+        //    var _const = (_data.list.length-1)/100;
+        //    var _start = Math.round(_const*params.start);
+        //    var _end = Math.round(_const*params.end);
+        //    helper.renderGridWithDrill(_data.list,_start,_end+1,_url);
+        //    helper.setPieDataOptions(_percent);
+        //    helper.render();
+        // });
+    </script>
+
+</head>
+<body>
+
+<div class="container txtCenter">
+    <h4>门店历史数据</h4>
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#diagram" role="tab" data-toggle="tab">图表</a></li>
+        <li><a href="#curdata" role="tab" data-toggle="tab">数据</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active whiteback ofhidden" id="diagram">
+            <h5>历史趋势</h5>
+            <div id="history" class="item historyChart">
+            </div>
+            <h5>数据汇总</h5>
+            <div id="pie" class="item pieChart">
+            </div>
+            <h5>员工数据</h5>
+            <div id="employee" class="item salesChart">
+            </div>
+        </div>
+        <div class="tab-pane whiteback ofhidden" id="curdata">
+            <div class="item" id='historyData'></div>
+            <div class="item" id='pieData'></div>
+            <div class="item" id='salesData'></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

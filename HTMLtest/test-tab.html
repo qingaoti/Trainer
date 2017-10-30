@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        $(function() {
+            $('#myTab a:last').tab('show'); //初始化显示哪个tab
+            $('#myTab a').click(function(e) {
+                e.preventDefault(); //阻止a链接的跳转行为
+                $(this).tab('show'); //显示当前选中的链接及关联的content
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#home">Home</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#messages">Messages</a></li>
+    <li><a href="#settings">Settings</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="home">...11111111111111111</div>
+    <div class="tab-pane" id="profile">...22222222222222222</div>
+    <div class="tab-pane" id="messages">...3333333333333333333333</div>
+    <div class="tab-pane" id="settings">...4444444444444444444</div>
+</div>
+
+
+</body>
+</html>
