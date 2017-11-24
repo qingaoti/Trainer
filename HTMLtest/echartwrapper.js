@@ -17,6 +17,10 @@ echartWrapper.prototype.Option = function (option) {
 	return this.option;
 };
 
+echartWrapper.prototype.setOption =function (option) {
+	this.chart.setOption(option);
+};
+
 echartWrapper.prototype.render = function () {
 	[].unshift.call(arguments, this.Option());
 	this.chart.setOption.apply(this.chart, arguments);
@@ -41,9 +45,20 @@ echartWrapper.prototype.dataStatuChangeValidation = function (start, end) {
 	return true;
 };
 
-
 echartWrapper.prototype.onDataZoom = function (func) {
 	this.chart.on("dataZoom", func);
+};
+
+echartWrapper.prototype.onClick = function (func) {
+    this.chart.on("click", func);
+};
+
+echartWrapper.prototype.onLegendSelectChanged = function (func) {
+    this.chart.on('legendselectchanged',func);
+};
+
+echartWrapper.prototype.dispatchAction = function (obj) {
+    this.chart.dispatchAction(obj);
 };
 
 echartWrapper.prototype.saveRange = function (start, end) {

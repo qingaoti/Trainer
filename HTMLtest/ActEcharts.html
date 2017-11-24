@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./echarts/echarts_3.6.2.min.js"></script>
+
+    <!-- build:js(./public) /scripts/chartwrapper.js -->
+    <script type="text/javascript" src="./echartwrapper.js"></script>
+    <script type="text/javascript" src="./historyReport.js"></script>
+    <script type="text/javascript" src="./teamEchart.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://libs.cdnjs.net/moment.js/2.9.0/moment.min.js"></script>
+
+    <style type="text/css">
+        body{
+            font-family: "微软雅黑"
+        }
+
+        .item{
+            margin:auto;
+            width:98%;
+        }
+
+        .historyChart{
+            height:300px;
+        }
+
+        .pieChart{
+            height:510px;
+        }
+
+        .salesChart{
+            height:550px;
+        }
+
+        .txtCenter{
+            text-align: center;
+        }
+
+
+        h5{
+            padding: 1rem 0rem 0.25rem 1.5rem;
+            margin:0px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        table{
+            width:90%;
+            border-collapse:collapse;
+            font-size: .75rem;
+            margin:auto auto 20px auto;
+        }
+
+        th,td{
+            border:solid 1px #dddddd;
+            text-align: center;
+            padding: 8px 0px;
+        }
+
+        tr:nth-of-type(odd) td{
+            background-color: #f8f8f8;
+        }
+
+        .whiteback{
+            background-color: white;
+        }
+
+        .ofhidden{
+            overflow: hidden;
+        }
+
+    </style>
+    <script type="text/javascript">
+        var _data; //大表数据
+        var zoomSize = 6;  // zoom 空间设置
+        var _his; //图表
+        var _teamReg; // 报名排行
+        var _search = {
+            startDate:moment().startOf('month').format("YYYY/MM/DD"),
+            endDate:moment().format("YYYY/MM/DD"),
+            type:{
+                成交数: false,
+                报名数: true,
+                支付数: false,
+                浏览量: false
+            }
+        };  //查询数据, 默认本月 和 类型是报名的
+
+
+        $(function() {
+            fetch("./data/ActEcharts.json").then(function(response){
+                if(response.status!==200){
+                    console.log("存在一个问题，状态码为："+response.status);
+                    return;
+                }
+                return response.json().then(function(data){
+//                    console.log(data);
+                    _data = data;
+                    initEvent(data.keys);
+                    return data.keys;
+                });
+            }).then(function(_monthLen){
+                _his = new hisChart(_data,'history','historyData');
+                _teamReg = new teamChart('reg');
+                _his.paint();
+                renderInfo();
+
+                _his.onLegendSelectChanged(function (params) {
+                    // 获取点击图例的选中状态
+                    var isSelected = params.selected[params.name];
+                    // 在控制台中打印
+//                    console.log((isSelected ? '选中了' : '取消选中了') + '图例' + params.name);
+                    // 打印所有图例的状态
+//                    console.log(params.selected);
+                    _search.type = params.selected;
+                    showContrast(); //刷新动态对比
+//                    renderInfo();
+                });
+
+//                _his.onClick(function (params) {
+//                    console.log(333);
+//                    console.log(params.dataIndex);
+//                    console.log(_monthLen[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+//                    console.log(_monthLen[Math.min(params.dataIndex + zoomSize / 2, _data.list.length - 1)]);
+//                    _his.dispatchAction({
+//                        type: 'dataZoom',
+//                        startValue: _monthLen[Math.max(params.dataIndex - zoomSize / 2, 0)],
+//                        endValue: _monthLen[Math.min(params.dataIndex + zoomSize / 2, _data.list.length - 1)]
+//                    });
+//                });
+
+            }).catch(function(err){
+                console.log("Fetch错误:"+err);
+            });
+        });
+        
+        function initEvent(_monthLen) {
+            // 初始化点击方法
+            $(".month").click(function(){
+                switch(this.dataset.month){
+                    case "90"://x等于1
+                        _search.startDate = moment().subtract( parseInt(this.dataset.month), 'days').format("YYYY/MM/DD");
+                        _search.endDate = moment().format("YYYY/MM/DD");
+                        break;
+                    case "180":
+                        _search.startDate = moment().subtract( parseInt(this.dataset.month), 'days').format("YYYY/MM/DD");
+                        _search.endDate = moment().format("YYYY/MM/DD");
+                        break;
+                    case "365":
+                        _search.startDate = moment().subtract( parseInt(this.dataset.month), 'days').format("YYYY/MM/DD");
+                        _search.endDate = moment().format("YYYY/MM/DD");
+                        break;
+                    default:
+                        _search.startDate = moment().startOf('month').format("YYYY/MM/DD");
+                        _search.endDate = moment().format("YYYY/MM/DD");
+                }
+                dispatchAction(this.dataset.month);
+                showContrast(); //刷新动态对比
+                showTeam();  //刷新团队排行
+                showAbility(); //刷新销售能力
+            });
+
+            // 初始化下拉框
+            var select = $(".monthSelect");
+            for(var i=0 ; i<_monthLen.length ;i++){  // result为返回的json对象row为包含选项的数组
+                var o = new Option(_monthLen[i],_monthLen[i]);
+                select[0].appendChild(o);
+            }
+            select.change(function(){
+                _search.startDate = moment(this.value,"YYYY/MM").startOf('month').format("YYYY/MM/DD");
+                _search.endDate = moment(this.value,"YYYY/MM").endOf('month').format("YYYY/MM/DD");
+                if(this.value === "all"){
+                    _search.startDate = "";
+                    _search.endDate = "";
+                }
+                dispatchAction(null,this.selectedIndex);
+                showContrast(); //刷新动态对比
+                showTeam();    //刷新团队排行
+                showAbility(); //刷新销售能力
+//                renderInfo();
+            });
+        }
+        
+        function renderInfo() {
+//            alert(JSON.stringify(_search));
+            showContrast(_search);
+            showTeam(_search.startDate,_search.endDate);
+            showAbility(_search.startDate,_search.endDate);
+            showMerchant();
+        }
+
+        //刷新图表
+        function  dispatchAction(dataset,selectedIndex) {
+            var _monthLen = _data.keys;
+            var index = _monthLen.length;
+            var option = {
+                title:{
+                    text:""
+                }
+            };
+            switch(dataset){
+                case "90"://x等于1
+                    option.title.text = "季度";
+                    break;
+                case "180":
+                    zoomSize = 12;
+                    option.title.text = "半年";
+                    break;
+                case "365":
+                    zoomSize = 24;
+                    option.title.text = "一年";
+                    break;
+                default:
+                    zoomSize = 6;
+                    option.title.text = "本月";
+            }
+
+            if(selectedIndex === 0){
+                option.title.text = "全部";
+                _his.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: 0,
+                    endValue: 100
+                });
+            }else {
+                index = selectedIndex;
+                if(!index) index = _monthLen.length;
+                if(selectedIndex) option.title.text = _monthLen[selectedIndex-1];
+                _his.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: _monthLen[Math.max(index - zoomSize / 2, 0)],
+                    endValue: _monthLen[Math.min(index + zoomSize / 2, _data.list.length - 1)]
+                });
+            }
+            _his.setOption(option);
+        }
+
+        // 显示动态对比
+        function showContrast (_search) {
+            return fetch("./data/ContrastData.json",_search).then(function(response){
+                if(response.status!==200){
+                    console.log("存在一个问题，状态码为："+response.status);
+                    return;
+                }
+                return response.json().then(function(data){
+                    $("#paperContrast").empty().append('<tr><td colspan="4" style="text-align: left">动态对比</td></tr>');
+                    for (var key in data){
+                        $("#paperContrast").append('<tr><td>'+key+'</td><td>同比:'+data[key].tongbi+'</td><td>环比:'+data[key].huanbi+'</td><td>比别人:'+data[key].bibieren+'</tr>');
+                    }
+                });
+            }).catch(function(err){
+                console.log("Fetch错误:"+err);
+            });
+        }
+
+        //显示团队数据
+        function showTeam() {
+            return fetch("./data/TeamData.json",_search).then(function(response){
+                if(response.status!==200){
+                    console.log("存在一个问题，状态码为："+response.status);
+                    return;
+                }
+                return response.json().then(function(data){
+                    $("#reg").empty();
+                    $("#pay").empty();
+                    $("#deal").empty();
+                    _teamReg.setOption();
+//                    $("#reg").append(JSON.stringify(data.reg));
+                    $("#pay").append(JSON.stringify(data.pay));
+                    $("#deal").append(JSON.stringify(data.deal));
+                });
+            }).catch(function(err){
+                console.log("Fetch错误:"+err);
+            });
+        }
+
+        //显示销售能力
+        function showAbility() {
+            var MList = calDiffMonths(moment(_search.startDate,"YYYY/MM/DD"),moment(_search.endDate,"YYYY/MM/DD"));
+            var numList =[];
+            var pv = reg = pay = deal = 0;
+            MList.forEach(function (n) {
+                numList.push(_data.keys.indexOf(n));
+            });
+            console.log(numList);
+            numList.forEach(function (n) {
+                pv += _data.list[n].pv.val;
+                reg += _data.list[n].reg.val;
+                pay += _data.list[n].pay.val;
+                deal += _data.list[n].deal.val;
+            });
+            var regRatio = (pv/reg).toFixed(2);
+            var payRatio = (reg/pay).toFixed(2);
+            var dealRatio = (pay/deal).toFixed(2);
+
+            $("#regRatio").empty();
+            $("#payRatio").empty();
+            $("#dealRatio").empty();
+            $("#regRatio").append(JSON.stringify(regRatio));
+            $("#payRatio").append(JSON.stringify(payRatio));
+            $("#dealRatio").append(JSON.stringify(dealRatio));
+
+            console.log("pv:"+pv+ ",reg:"+reg+",pay:"+pay+",deal:"+deal);
+        }
+
+        //显示店面概况
+        function showMerchant() {
+            $("#saleRatio").empty();
+            $("#broker").empty();
+            $("#customer").empty();
+            $("#regRatio").append("70%");
+            $("#broker").append("126");
+            $("#customer").append("768");
+        }
+        /**
+         * Calcaulate diff Months between two month
+         *
+         * @Author   gtqin
+         * @DateTime 2017-08-16T14:56:41+0800
+         * @param    {Monment} StartDate
+         * @param    {Monment} EndDate
+         * @return   {Array} month array
+         */
+        function calDiffMonths(StartDate, EndDate) {
+            var CurrentMonth = StartDate.startOf('month');
+            var Months = [];
+            while (CurrentMonth <= EndDate) {
+                Months.push(CurrentMonth.format("YYYY/MM"));
+                CurrentMonth = CurrentMonth.add(1, 'months');
+            }
+            return Months;
+        }
+    </script>
+
+</head>
+<body>
+
+<div class="container txtCenter">
+    <h4>门店历史数据</h4>
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#diagram" role="tab" data-toggle="tab">图表</a></li>
+        <li><a href="#curdata" role="tab" data-toggle="tab">数据</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active whiteback ofhidden" id="diagram">
+            <div>
+                <span data-month=""  class = "month">本月</span>
+                <span data-month="90" class = "month">近三个月</span>
+                <span data-month="180" class = "month">近半年</span>
+                <span data-month="365" class = "month">近一年</span>
+                <select class = "monthSelect">
+                    <option value="all">全部</option>
+                </select>
+            </div>
+            <div id="history" class="item historyChart"></div>
+
+            <div>
+                <table id="paperContrast">
+                    <tr><td colspan="4" style="text-align: left">动态对比</td></tr>
+                    <tr><td>报名数</td><td>同比20%</td><td>环比20%</td><td>比别人20%</td></tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td>团队排行</td>
+                        <td>报名榜<div id="reg" style="width :200px;height:200px;"></div></td>
+                        <td>支付榜<div id="pay"></div></td>
+                        <td>成交榜<div id="deal"></div></td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr><td>销售能力</td><td>报名转化率<div id="regRatio"></div></td><td>活动邀约率<div id="payRatio"></div></td><td>成交转化率<div id="dealRatio"></div></td></tr>
+                </table>
+
+                <table>
+                    <tr><td>店面概况</td><td>全员销售率<div id="saleRatio"></div></td><td>合作经纪人<div id="broker"></div></td><td>累计客户<div id="customer"></div></td></tr>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="tab-pane whiteback ofhidden" id="curdata">
+            <div class="item" id='historyData'></div>
+            <div class="item" id='pieData'></div>
+            <div class="item" id='salesData'></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

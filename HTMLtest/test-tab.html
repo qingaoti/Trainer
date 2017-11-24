@@ -9,6 +9,24 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script>
         $(function() {
+            fetch("./students.json")
+                .then(
+                    function(response){
+                        if(response.status!==200){
+                            console.log("存在一个问题，状态码为："+response.status);
+                            return;
+                        }
+                        //检查响应文本
+                        response.json().then(function(data){
+                            alert(123);
+                            console.log(data);
+                        });
+                    }
+                )
+                .catch(function(err){
+                    console.log("Fetch错误:"+err);
+                });
+
             $('#myTab a:last').tab('show'); //初始化显示哪个tab
             $('#myTab a').click(function(e) {
                 e.preventDefault(); //阻止a链接的跳转行为

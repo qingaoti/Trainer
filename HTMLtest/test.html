@@ -2192,6 +2192,7 @@
             _sales.toTable(_rangeData.start,_rangeData.end);
 
             _his.onDataZoom(function(params){
+                alert(12);
                 var _const = (_data.list.length-1)/100;
                 var _start = Math.round(_const*params.start);
                 var _end = Math.round(_const*params.end);
@@ -2201,21 +2202,9 @@
                 _pie.toTable(_rangeData.start,_rangeData.end);
                 _sales.paint(_rangeData.start,_rangeData.end);
                 _sales.toTable(_rangeData.start,_rangeData.end);
-            });
 
-            debugger;
-            $('#myTab a:last').tab('show'); //初始化显示哪个tab
-
-
-            $('#myTab a').click(function(e) {
-                e.preventDefault(); //阻止a链接的跳转行为
-                $(this).tab('show'); //显示当前选中的链接及关联的content
             });
         };
-
-
-
-
 
         // var _data = (new FakeData()).allData();
         // var helper = new ChartHelper('main','data');

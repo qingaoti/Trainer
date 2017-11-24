@@ -1,45 +1,55 @@
 var hisChart = (function () {
 
-
 	var _series = [
-		{ name: '报名数', type: 'line', yAxisIndex: 0, data: [], itemStyle: { normal: { color: '#FF9900' } } },
-		{ name: '支付数', type: 'line', yAxisIndex: 0, data: [], itemStyle: { normal: { color: '#FF3366' } } },
-		{ name: '成交数', type: 'line', yAxisIndex: 0, data: [], itemStyle: { normal: { color: '#990000' } } },
-		{ name: '浏览量', type: 'bar', yAxisIndex: 1, data: [], itemStyle: { normal: { color: '#99CCFF' } } },
-		{ name: '分享数', type: 'bar', yAxisIndex: 1, data: [], itemStyle: { normal: { color: '#99FFFF' } } }
+		{ name: '报名数', type: 'line', yAxisIndex: 0, data: [],smooth:true, itemStyle: { normal: { color: '#FF9900' } } },
+		{ name: '支付数', type: 'line', yAxisIndex: 0, data: [],smooth:true, itemStyle: { normal: { color: '#FF3366' } } },
+		{ name: '成交数', type: 'line', yAxisIndex: 0, data: [],smooth:true, itemStyle: { normal: { color: '#990000' } } },
+		{ name: '浏览量', type: 'bar', yAxisIndex: 1, data: [],smooth:true, itemStyle: { normal: { color: '#99CCFF'  } } }
 	];
 
 	var opt = {
-		title: [],
+		title: {
+			text:''
+		},
 		legend: [{
-			data: ['浏览量', '分享数', '报名数', '支付数', '成交数'],
-			top: 5
-			}],
+			data: ['浏览量', '报名数', '支付数', '成交数'],
+            selected:{
+                '浏览量':false,
+                '报名数':true,
+                '支付数':false,
+                '成交数':false
+            }
+		}],
 		grid: {
 			height: 150,
 			top: 60
-
 		},
 		dataZoom: {
-			type: 'slider',
+			type: 'inside',
 			height: 30,
 			handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
 			handleSize: '150%',
 			zoomLock: false,
 			top: 245,
-			xAxisIndex: 0
+			xAxisIndex: 0,
+            start: 0,
+            end: 100
 		},
-		tooltip: {
-			trigger: 'axis'
-		},
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
 		xAxis: {
 			data: [],
-			axisPointer: {
-				type: 'shadow'
-			},
 			splitLine: {
 				show: false
 			},
+            silent :true
 		},
 		yAxis: [
 			{
@@ -68,8 +78,6 @@ var hisChart = (function () {
 		series: _series
 	};
 
-
-
 	function chart(data, chartId, dataId) {
 		echartWrapper.apply(this, arguments);
 		this.Option(opt);
@@ -97,7 +105,6 @@ var hisChart = (function () {
 			_series[1].data.push(_item.pay ? _item.pay.val : 0);
 			_series[2].data.push(_item.deal ? _item.deal.val : 0);
 			_series[3].data.push(_item.pv ? _item.pv.val : 0);
-			_series[4].data.push(_item.share ? _item.share.val : 0);
 		}
 	};
 

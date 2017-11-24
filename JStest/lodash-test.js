@@ -251,6 +251,32 @@ var f =['A1','A2','B3','M4'];
 //     console.log(item.name);
 // });
 
-var arr=['user','hui-user','link-user'];
-var obj =  _.findIndex(arr,'link-user');
-console.log(obj);
+// var arr=['user','hui-user','link-user'];
+// var obj =  _.findIndex(arr,'link-user');
+// console.log(obj);
+
+var obj = {
+    "keys": [
+        "2016/01",
+        "2016/02",
+        "2016/03",
+        "2016/04",
+        "2016/05",
+        "2016/06",
+        "2016/07",
+        "2016/08",
+        "2016/09",
+        "2016/10",
+        "2016/11",
+        "2016/12",
+        "2017/01",
+        "2017/02",
+        "2017/03",
+        "2017/04",
+        "2017/05",
+        "2017/06",
+        "2017/07"
+    ]
+};
+
+console.log(obj.keys.indexOf("2016/02"));

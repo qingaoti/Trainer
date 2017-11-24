@@ -1,0 +1,22 @@
+{
+  "deal": {
+    "tongbi":10,
+    "huanbi":20,
+    "bibieren":15
+  },
+  "reg": {
+    "tongbi":12,
+    "huanbi":22,
+    "bibieren":17
+  },
+  "pay": {
+    "tongbi":-8,
+    "huanbi":-12,
+    "bibieren":-40
+  },
+  "pv": {
+    "tongbi":40,
+    "huanbi":10,
+    "bibieren":2
+  }
+}
