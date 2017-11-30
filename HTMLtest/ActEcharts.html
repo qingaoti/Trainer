@@ -9,6 +9,7 @@
     <script type="text/javascript" src="./echartwrapper.js"></script>
     <script type="text/javascript" src="./historyReport.js"></script>
     <script type="text/javascript" src="./teamEchart.js"></script>
+    <script type="text/javascript" src="./canvas.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -81,6 +82,12 @@
         var zoomSize = 6;  // zoom 空间设置
         var _his; //图表
         var _teamReg; // 报名排行
+        var _teamPay; //支付排行
+        var _teamDeal; //成交排行
+        var _regRatio; //报名转化率
+        var _payRatio; // 活动邀约率
+        var _dealRatio; //成交转化率
+
         var _search = {
             startDate:moment().startOf('month').format("YYYY/MM/DD"),
             endDate:moment().format("YYYY/MM/DD"),
@@ -105,9 +112,16 @@
                     initEvent(data.keys);
                     return data.keys;
                 });
-            }).then(function(_monthLen){
+            }).then(function(){
                 _his = new hisChart(_data,'history','historyData');
-                _teamReg = new teamChart('reg');
+                _teamReg = new teamChart('reg','报名榜');
+                _teamPay = new teamChart('pay','支付榜');
+                _teamDeal = new teamChart('deal','成交榜');
+
+                _regRatio = new canvas('regRatio',"报名转化率","报名/浏览量");
+                _payRatio = new canvas('payRatio',"活动邀约率","支付/报名");
+                _dealRatio = new canvas('dealRatio',"成交转化率","支付/成交");
+
                 _his.paint();
                 renderInfo();
 
@@ -267,13 +281,9 @@
                     return;
                 }
                 return response.json().then(function(data){
-                    $("#reg").empty();
-                    $("#pay").empty();
-                    $("#deal").empty();
-                    _teamReg.setOption();
-//                    $("#reg").append(JSON.stringify(data.reg));
-                    $("#pay").append(JSON.stringify(data.pay));
-                    $("#deal").append(JSON.stringify(data.deal));
+                    _teamReg.setData(data.reg);
+                    _teamPay.setData(data.pay);
+                    _teamDeal.setData(data.deal);
                 });
             }).catch(function(err){
                 console.log("Fetch错误:"+err);
@@ -299,12 +309,14 @@
             var payRatio = (reg/pay).toFixed(2);
             var dealRatio = (pay/deal).toFixed(2);
 
-            $("#regRatio").empty();
-            $("#payRatio").empty();
-            $("#dealRatio").empty();
-            $("#regRatio").append(JSON.stringify(regRatio));
-            $("#payRatio").append(JSON.stringify(payRatio));
-            $("#dealRatio").append(JSON.stringify(dealRatio));
+            console.log(regRatio+"d:"+payRatio+"sd"+dealRatio);
+//            $("#regRatio").empty();
+//            $("#payRatio").empty();
+//            $("#dealRatio").empty();
+
+            _regRatio.setData(regRatio);
+            _payRatio.setData(payRatio);
+            _dealRatio.setData(dealRatio);
 
             console.log("pv:"+pv+ ",reg:"+reg+",pay:"+pay+",deal:"+deal);
         }
@@ -369,14 +381,21 @@
                 <table>
                     <tr>
                         <td>团队排行</td>
-                        <td>报名榜<div id="reg" style="width :200px;height:200px;"></div></td>
-                        <td>支付榜<div id="pay"></div></td>
-                        <td>成交榜<div id="deal"></div></td>
+                        <td><div id="reg" style="width :200px;height:200px;"></div></td>
+                        <td><div id="pay" style="width :200px;height:200px;"></div></td>
+                        <td><div id="deal" style="width :200px;height:200px;"></div></td>
                     </tr>
                 </table>
 
                 <table>
-                    <tr><td>销售能力</td><td>报名转化率<div id="regRatio"></div></td><td>活动邀约率<div id="payRatio"></div></td><td>成交转化率<div id="dealRatio"></div></td></tr>
+                    <tr>
+                        <td>销售能力</td>
+                        <td>
+                            <canvas id="regRatio" style="width :200px;height:200px;" >您的浏览器不支持canvas！</canvas>
+                        </td>
+                        <td><canvas id="payRatio" style="width :200px;height:200px;"></canvas></td>
+                        <td><canvas id="dealRatio" style="width :200px;height:200px;"></canvas></td>
+                    </tr>
                 </table>
 
                 <table>

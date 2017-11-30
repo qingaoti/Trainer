@@ -2,7 +2,7 @@ var teamChart = (function () {
 
     var opt =  {
         title: {
-            text:'报名榜'
+            text:''
         },
         color: ['#3398DB'],
         tooltip : {
@@ -20,9 +20,9 @@ var teamChart = (function () {
         xAxis : [
             {
                 type : 'category',
-                data : ['李明源', '费翔', '王玉玉'],
+                data : [],
                 axisLabel:{
-                    textStyle:{ fontSize:20}
+                    textStyle:{ fontSize:12}
                 },
                 axisTick: {
                     alignWithLabel: true
@@ -39,7 +39,7 @@ var teamChart = (function () {
                 name:'直接访问',
                 type:'bar',
                 barWidth: '80%',
-                data:[ 1000, 100, 21]
+                data:[]
             }
         ],
         label: {
@@ -61,13 +61,33 @@ var teamChart = (function () {
 	function chart(chartId,title) {
         this.chart = echarts.init(document.getElementById(chartId));
         opt.title.text = title;
+        if(chartId === "reg"){
+            opt.color = ['#3398DB'];
+		}else if (chartId === "pay"){
+            opt.color = ['#dba21b'];
+		}else if(chartId === "deal"){
+            opt.color = ['#1cd8db'];
+		}
         this.chart.setOption(opt);
-        return this.chart;
 	}
 
-    chart.prototype.setData(data){
-		this.chart
-	}
+    chart.prototype.setData = function (data) {
+        var obj = {
+            xAxis:[
+                {
+                    data: []
+                }
+            ],
+            series:[
+                {
+                    data: []
+                }
+            ]
+        };
+        obj.xAxis[0].data = data.sale;
+        obj.series[0].data = data.val;
+        this.chart.setOption(obj);
+    };
 
 	return chart;
 })();
