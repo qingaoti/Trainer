@@ -73,18 +73,15 @@ var canvas = (function () {
 
     function canvas(canvasId,title,memo) {
         drowProcess(canvasId,title,memo);
-        opt.canvasId = canvasId;
-        opt.title = title;
-        opt.memo = memo;
-        this.opt = opt;
+        this.canvasId = canvasId;
+        this.title = title;
+        this.memo = memo;
     }
 
     canvas.prototype.setData = function (data) {
-        debugger;
-        drowProcess(this.opt.canvasId,this.opt.title,this.opt.memo,data);
-
+        drowProcess(this.canvasId,this.title,this.memo,data);
         var t;
-        var bfb = this.opt.process;
+        var bfb = 0;
         var timefunction = function () {
             if(bfb >= data){
                 clearTimeout(t);

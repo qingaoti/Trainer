@@ -298,7 +298,6 @@
             MList.forEach(function (n) {
                 numList.push(_data.keys.indexOf(n));
             });
-            console.log(numList);
             numList.forEach(function (n) {
                 pv += _data.list[n].pv.val;
                 reg += _data.list[n].reg.val;
@@ -313,6 +312,7 @@
 //            $("#regRatio").empty();
 //            $("#payRatio").empty();
 //            $("#dealRatio").empty();
+            debugger;
 
             _regRatio.setData(regRatio);
             _payRatio.setData(payRatio);
@@ -323,12 +323,9 @@
 
         //显示店面概况
         function showMerchant() {
-            $("#saleRatio").empty();
-            $("#broker").empty();
-            $("#customer").empty();
-            $("#regRatio").append("70%");
-            $("#broker").append("126");
-            $("#customer").append("768");
+//            $("#saleInfo").append("70%");
+//            $("#broker").append("126");
+//            $("#customer").append("768");
         }
         /**
          * Calcaulate diff Months between two month
@@ -399,7 +396,46 @@
                 </table>
 
                 <table>
-                    <tr><td>店面概况</td><td>全员销售率<div id="saleRatio"></div></td><td>合作经纪人<div id="broker"></div></td><td>累计客户<div id="customer"></div></td></tr>
+                    <tr>
+                        <td>店面概况</td>
+                        <td >
+                            <div style="width :200px;" id="saleInfo" >
+                                <h4>全员销售率</h4>
+                                <h5>70%</h5>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width:70%; background:#2e9dc2;">
+                                        <div class="progress-value">12122</div>
+                                    </div>
+                                </div>
+                                <b>活动/已注册</b>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width :200px" id="broker">
+                                <h4>合作经纪人</h4>
+                                <h5>1234</h5>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width:70%; background:#2e9dc2;">
+                                        <div class="progress-value">12122</div>
+                                    </div>
+                                </div>
+                                <b>活跃+已注册</b>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width :200px" id="customer">
+                                <h4>累计客户</h4>
+                                <h5>1234</h5>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width:70%; background:#2e9dc2;">
+                                        <span style="text-align: left ;margin-left: 0px">22</span>
+                                        <span style="text-align: right">33</span>
+                                    </div>
+                                </div>
+                                <b>成交+战败</b>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
 
             </div>
