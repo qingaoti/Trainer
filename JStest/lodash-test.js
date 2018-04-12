@@ -24,6 +24,8 @@ var f =['A1','A2','B3','M4'];
 // console.log(str.substr(0,1) + "先生");
 
 
+var deviceTypeList = ['android','ios'];
+console.log(!_.includes(deviceTypeList,"ios1"));
 
 // var car_status = {
 //     off_sale:"off_sale",      // 下架    对应之前的是1
@@ -31,6 +33,13 @@ var f =['A1','A2','B3','M4'];
 //         approval : "approval",    //审批中   对应之前的是2
 //         sold: "sold"              //已售     对应之前的是10
 // };
+// console.log("tttt");
+// console.log(_.includes(car_status,"on_sale"));
+
+// _.forIn(car_status, function(value, key) {
+//     console.log(key);
+//     console.log(value)
+// });
 //
 // _.isElement();
 //
@@ -278,5 +287,11 @@ var obj = {
         "2017/07"
     ]
 };
-
-console.log(obj.keys.indexOf("2016/02"));
+//
+// console.log(obj.keys.indexOf("2016/02"));
+//
+// var car = {
+//     status: 'err',
+//     residual_rate: null
+// };
+// console.log(!_.isEmpty(car.residual_rate));
