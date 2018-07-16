@@ -70,6 +70,8 @@ console.log(`
   are on sale!
 `);
 
+console.log(() => `${cat.name} cacaca ${cat.dress}`);
+
 // <Link to={`/taco/${taco.name}`}>{taco.name}</Link>
 
 let dog = {type: 'animal', many: 2};

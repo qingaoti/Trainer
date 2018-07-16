@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<body>
+<div>
+    <table style="margin-left: 35px;border-collapse:separate; border-spacing:10px;">
+        <tr style="height: 20px">
+            <td style="text-align: right">用户名:</td>
+            <td><input id="name" /></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">密　码:</td>
+            <td><input id="password" type="password"/></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">学　号:</td>
+            <td><input id="stu_no"/></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">性　别:</td>
+            <td>
+                <select id="sex">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right">年　龄:</td>
+            <td><input id="age"/></td>
+        </tr>
+    </table>
+    <div style="margin-top: 20px">
+        <button style="margin-left: 35px" onclick="reg()">注册</button>
+        <button style="margin-left: 10px" onclick="cencel()">取消</button>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+    function reg() {
+        var user = {
+            "name":$("#name").val(),
+            "password":  $("#password").val(),
+            "stu_no": $("#stu_no").val(),
+            "sex": $("#sex").val(),
+            "age": $("#age").val()
+        };
+        console.log(user);
+        top.location='login.html';
+    }
+
+    function cencel() {
+        $("#name").val("");
+        $("#password").val("");
+        $("#stu_no").val("");
+        $("#age").val("");
+    }
+</script>

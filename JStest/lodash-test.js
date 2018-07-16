@@ -7,8 +7,13 @@ var nul = null;
 var nan = NaN;
 var d = '123123';
 var b = 'asdcasd';
-var o = {'a':123,'b':'123'};
-var f =['A1','A2','B3','M4'];
+var o = {'a': 123, 'b': '123'};
+var f = ['A1', 'A2', 'B4', 'M5'];
+var f1 = ['A1', 'A2', 'B3', 'M4'];
+
+console.log(_.concat(f1,f));
+
+_.toNumber()
 //
 // if(!ling || ling < 0 ){
 //     console.log("进来了");
@@ -24,8 +29,84 @@ var f =['A1','A2','B3','M4'];
 // console.log(str.substr(0,1) + "先生");
 
 
-var deviceTypeList = ['android','ios'];
-console.log(!_.includes(deviceTypeList,"ios1"));
+// var deviceTypeList = ['android','ios'];
+// console.log(!_.includes(deviceTypeList,"ios1"));
+
+var card = [
+    {
+        "isGet": false,
+        "payTime": 1530081547143.0,
+        "pay": 100,
+        "type": "open",
+        "val": 2
+    }, {
+        "isGet": false,
+        "payTime": 1530081547143.0,
+        "pay": 99,
+        "type": "recharge",
+        "val": 2
+    }, {
+        "isGet": true,
+        "payTime": 1530081547143.0,
+        "pay": 98,
+        "type": "pay",
+        "val": 2
+    }
+];
+
+console.log("tt", _.findLast(card, {isGet: false, type: "open"}));
+
+var data = [{
+    ref_type: 'merchant',
+    end_time: '2018-06-27T08:09:07.595Z',
+    start_time: '2018-06-27T08:09:07.595Z',
+    cp_type: 'card',
+    description: '备注信息: 充值100元 送5次洗车 2次保养',
+    name: 'card/时间:1530086947591',
+    _id: '5b334623b28a193c36fe3643',
+    isDisabled: false
+}, {
+        ref_type: 'merchant',
+        end_time: '2018-06-27T08:09:07.602Z',
+        start_time: '2018-06-27T08:09:07.601Z',
+        cp_type: 'card',
+        description: '备注信息: 充值100元 送5次洗车 2次保养',
+        name: 'card/时间:1530086947601',
+        _id: '5b334623b28a193c36fe3642',
+        isDisabled: false
+    },
+    {
+        ref_type: 'merchant',
+        end_time: '2018-06-27T08:09:07.602Z',
+        start_time: '2018-06-27T08:09:07.602Z',
+        cp_type: 'card',
+        description: '备注信息: 充值100元 送5次洗车 2次保养',
+        name: 'card/时间:1530086947602',
+        _id: '5b334623b28a193c36fe3644',
+        isDisabled: false
+    }];
+
+console.log("tt-data", _.map(data, "_id"));
+
+var roles = [
+    "user",
+    "admin",
+    "superadmin",
+    "hui-user",
+    "oldsc",
+    "newsc",
+    "carkeeper",
+    "financial_specialist",
+    "aftermarket_exploer",
+    "act-sale",
+    "act_quote",
+    "er-admin",
+    "link-admin",
+    "link-user"
+];
+roles = [];
+console.log(!_.includes(roles, "carkeeper"));
+
 
 // var car_status = {
 //     off_sale:"off_sale",      // 下架    对应之前的是1
@@ -218,7 +299,6 @@ console.log(!_.includes(deviceTypeList,"ios1"));
 //     "coupon_key" : "2017021504004907531",
 //     "status" : "available",
 // };
-
 
 
 //

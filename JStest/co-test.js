@@ -8,10 +8,10 @@ var encode ={
 /**
  *  1 .. 异步串行调用   ---不用流程控制的结果
  */
-//fs.readFile('test/one.txt', function (err, data) {
-//    if (err) throw err;
-//    console.log(data.toString());
-//});
+fs.readFile('test/one.txt', function (err, data) {
+   if (err) throw err;
+   console.log(data.toString());
+});
 //
 //fs.readFile('test/two.txt', function (err, data) {
 //    if (err) throw err;
@@ -280,18 +280,18 @@ readFile("test/one.txt")
 
 
 //队列执行
-//var queue = [];
-//queue.push(readFile("test/one.txt"));
-//queue.push(readFile("test/two.txt"));
-//queue.push(readFile("test/three.txt"));
-//Q.all(queue)
-//    .then(function(data){
-//        console.log("返回1",data[0].toString());
-//        console.log("返回2",data[1].toString());
-//        console.log("返回3",data[2].toString());
-//    },function(err){
-//        console.log(err);
-//});
+var queue = [];
+queue.push(readFile("test/one.txt"));
+queue.push(readFile("test/two.txt"));
+queue.push(readFile("test/three.txt"));
+Q.all(queue)
+   .then(function(data){
+       console.log("返回1",data[0].toString());
+       console.log("返回2",data[1].toString());
+       console.log("返回3",data[2].toString());
+   },function(err){
+       console.log(err);
+});
 //
 ////遵循cps的函数 可以使用Q.nfcall nfapply变成promise
 //Q.nfcall(fs.readFile,"text01",'utf-8')

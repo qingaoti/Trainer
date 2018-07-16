@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="select2.css" rel="stylesheet"/>
+<script src="select2.full.min.js"></script>
+<body>
+    <select id="e1" style="width: 300px">
+    </select>
+    <br>
+    <select id="e2" class="themes">
+        <option value="SelectBoxIt themes:" data-iconurl="http://7-imgpub.huanchezu.com/template/huiyuan_thumbnail.jpg-normal">
+            SelectBoxIt themes:
+        </option>
+        <option value="Twitter Bootstrap" data-iconurl="http://7-imgpub.huanchezu.com/template/huiyuan_thumbnail.jpg-normal">
+            Twitter Bootstrap
+        </option>
+        <option value="jQuery UI" data-iconurl="jquery-ui-logo.png">
+            jQuery UI
+        </option>
+
+    </select>
+</body>
+</html>
+
+<script>
+    $(function() {
+        var json = [
+                {
+                    "id":0,
+                    "text":"常规",
+                    "tpl_id":"changgui",
+                    "is_vip":false,
+                    "icon":"http://7-imgpub.huanchezu.com/template/huiyuan_thumbnail.jpg-normal",
+                    "html":"html"
+                },
+                {
+                    "id":1,
+                    "text":"常规1",
+                    "tpl_id":"changgui",
+                    "is_vip":false,
+                    "icon":"http://7-imgpub.huanchezu.com/template/huiyuan_thumbnail.jpg-normal",
+                    "html":"html"
+                },
+                {
+                    "id":2,
+                    "text":"常规2",
+                    "tpl_id":"changgui",
+                    "is_vip":false,
+                    "icon":"http://7-imgpub.huanchezu.com/template/huiyuan_thumbnail.jpg-normal",
+                    "html":"html"
+                }
+            ];
+
+        var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+
+        $("#e1").select2({
+            data:json,
+            placeholder: "Select a State",
+            templateResult: formatState,
+            formatResult: formatState
+        });
+        $("#e2").select2();
+    });
+
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        var $state = $(
+            '<span><img src="' + state.icon + '" class="img-flag" />' + state.text + '</span>'
+        );
+
+        return $state;
+    }
+</script>

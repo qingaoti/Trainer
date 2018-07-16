@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<body>
+    <div>
+        <img src="
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAAAAAAb2I2mAAACsklEQVR42u3bS3LbMBAFQN3/0skyGxF+D6BMQGmuXJJJoLmYmg/0+vPt14uQkJCQkJCQkJCQkJCQkJDwXOHr5+vf/40f8O55l/e++/byKZe7IiQkPEh4HZzerHl5bwoJnpfuipCQ8DThOAqOI97lpoOYG8TXOK4TEhKeLRwne0EovLwjCMGEhIT/ibCKtIF6XO0REhJ+q7CrxOZIK72rT1fAhISEHxZWPe9f++uxrj4hIeHdwm5OXld2fcL27EkFQkLCjwjHqwdVXN+TSjtbQaVISEh4hjCYwPfVXvoCgx1UgZeQkHBn4XgzfTepP4ZUpXiz9SEhIeFTwsB1d2itzjBWFSUhIeGmwsvVg4l+0J0KPguq0fj8IyEh4cbCaoQVpF9VQE3PPy7FUkJCwkeFk5P1lWHbuP8UpGlLpy8JCQkfEAb3VWv2o/mVdQkJCQ8SVuGxajgtHyqq3iIhIeGmwqpV1Lex+yIxfamEhIQHCccBsF84PdIYtLKq90lISLizsPvlVHjw8J7eeNUgJyQk3FlYZV7VbUEIDgJ52oQiJCTcWXjjFsZXH4L7bjohIeGmwiC3SlO8dJfpEcQ+dSMkJNxZmGZKQTM8PRSdxvC0vUVISHiGcHnkXv0GI3jHaQeMkJBwe2G1rX7sttJmT98OISHhGcKVeddKjJzIy+6e4xMSEv6acCV1q4Js8FnaKickJDxcmMbX4BhhUFsGixMSEh4uTK++2ptsQk2mc4SEhDsLJyPoeJw2fkr1K4vuwAAhIeHGwmrA3zeIJodofeObkJBwe+E9Ma3Kwaq4fmfPm5CQcHdhPw1Lw2N6ToiQkPBbheNErJ+aTXa2CAkJDxcG31ZT/uDt3DPgJyQkPEM4WZhV1V6VyfUdK0JCwp2FX3UREhISEhISEhISEhISEhISnnH9BUUTDyMLoZuIAAAAAElFTkSuQmCC"/>
+        <table style="margin-left: 35px;border-collapse:separate; border-spacing:10px;">
+            <tr style="height: 20px">
+                <td style="text-align: right">用户名:</td>
+                <td><input id="name" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">密　码:</td>
+                <td><input id="password" type="password"/></td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top: 20px">
+        <button style="margin-left: 35px" onclick="login()">登陆</button>
+        <button style="margin-left: 10px" onclick="cencel()">取消</button>
+        <button style="margin-left: 10px" onclick=" window.location='register.html'">注册</button>
+    </div>
+</body>
+</html>
+
+<script>
+    $(function() {// 初始化内容
+        var users = [];
+        var data = {
+            "stu_no":"A001",
+            "name":"admin",
+            "password":"1234",
+            "sex":"F",
+            "age":20
+        };
+        users.push(data);
+        localStorage.setItem("users",JSON.stringify(users));
+    });
+
+    function login() {
+        var name = $("#name").val();
+        var password = $("#password").val();
+
+        var users = JSON.parse(localStorage.getItem("users"));
+        console.log(users);
+        users.forEach(function (user) {
+            if (user.name == name && user.password == password) {
+                alert("登陆成功");
+            }else{
+                alert("登陆不成功,可能账号密码不对");
+            }
+        });
+    }
+
+    function cencel() {
+        $("#name").val("");
+        $("#password").val("");
+    }
+</script>
