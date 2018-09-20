@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <style type="text/css">
+        #test{
+            width:30px;
+            height: 30px;
+            background:url("image/organization.png");
+            float:left;
+        }
+
+
+        .test-normal{
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            transition: transform .5s;
+        }
+
+        .test-inverse{
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transition: transform .5s;
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+<div id="test" class="test-normal"></div>
+
+
+<script type="text/javascript" src="js/jquery.js" ></script>
+<script type="text/javascript">
+    $("#test").click(function(){
+        if($(this).hasClass("test-inverse")){
+            $(this).removeClass("test-inverse")
+        }else{
+            $(this).addClass("test-inverse")
+        }
+    });
+</script>
+
+
+</body>
+
+
+</html>

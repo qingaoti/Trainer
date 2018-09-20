@@ -1,10 +1,14 @@
 var moment = require('moment');
+var _ = require('lodash');
 // var rst = {"code":200,"error":false,"message":"回调成功","data":{"code":400,"error":true,"message":"[NOTENOUGH]可用余额不足，请充值后重新发起"}};
 // console.log(rst);
 //
 // if(rst.data.code != 200){
 //     throw new Error(rst.data.message);
 // }
+
+console.log("效验时间格式",moment("2018-5", 'YYYY-MM').isValid());
+
 
 // var obj = moment().startOf('day').toDate();
 
@@ -58,6 +62,20 @@ function calDiffMonths(StartDate, EndDate) {
     }
     return Months;
 }
+
+function getDateParam(month,type) {
+    if (!_.isEmpty(month) && moment(month, 'YYYY-MM').isValid()) {
+        let param = {
+            startDate: moment(month).format('YYYY-MM-DD HH:mm:ss'),
+            endDate: moment(month).add(1, type).subtract(1, 'seconds').format('YYYY-MM-DD HH:mm:ss'),
+        };
+        return param;
+    } else {
+        return null;
+    }
+}
+
+console.log("getDateParam 测试",getDateParam("2018-01","M"));
 
 /**
  * 传入年龄 ,返回查询需要的开始时间 和结束时间

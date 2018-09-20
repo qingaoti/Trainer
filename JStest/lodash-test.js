@@ -11,9 +11,19 @@ var o = {'a': 123, 'b': '123'};
 var f = ['A1', 'A2', 'B4', 'M5'];
 var f1 = ['A1', 'A2', 'B3', 'M4'];
 
-console.log(_.concat(f1,f));
+let test_und = _.toNumber(und)  || 0 ;
+let test_nan = _.toNumber(nan)  || 0 ;
+let test_kong = _.toNumber(kong)  || 0 ;
+let test_null = _.toNumber(nul)  || 0 ;
+let test_b = _.toNumber(b)  || 0 ;
+let test_d = _.toNumber(d)  || 0 ;
 
-_.toNumber()
+console.log("test_und",test_und);
+console.log("test_nan",test_nan);
+console.log("test_kong",test_kong);
+console.log("test_null",test_null);
+console.log("test_b",test_b);
+console.log("test_d",test_d);
 //
 // if(!ling || ling < 0 ){
 //     console.log("进来了");
@@ -32,29 +42,29 @@ _.toNumber()
 // var deviceTypeList = ['android','ios'];
 // console.log(!_.includes(deviceTypeList,"ios1"));
 
-var card = [
-    {
-        "isGet": false,
-        "payTime": 1530081547143.0,
-        "pay": 100,
-        "type": "open",
-        "val": 2
-    }, {
-        "isGet": false,
-        "payTime": 1530081547143.0,
-        "pay": 99,
-        "type": "recharge",
-        "val": 2
-    }, {
-        "isGet": true,
-        "payTime": 1530081547143.0,
-        "pay": 98,
-        "type": "pay",
-        "val": 2
-    }
-];
-
-console.log("tt", _.findLast(card, {isGet: false, type: "open"}));
+// var card = [
+//     {
+//         "isGet": false,
+//         "payTime": 1530081547143.0,
+//         "pay": 100,
+//         "type": "open",
+//         "val": 2
+//     }, {
+//         "isGet": false,
+//         "payTime": 1530081547143.0,
+//         "pay": 99,
+//         "type": "recharge",
+//         "val": 2
+//     }, {
+//         "isGet": true,
+//         "payTime": 1530081547143.0,
+//         "pay": 98,
+//         "type": "pay",
+//         "val": 2
+//     }
+// ];
+//
+// console.log("tt", _.findLast(card, {isGet: false, type: "open"}));
 
 var data = [{
     ref_type: 'merchant',
@@ -86,7 +96,7 @@ var data = [{
         isDisabled: false
     }];
 
-console.log("tt-data", _.map(data, "_id"));
+// console.log("tt-data", _.map(data, "_id"));
 
 var roles = [
     "user",
@@ -105,7 +115,7 @@ var roles = [
     "link-user"
 ];
 roles = [];
-console.log(!_.includes(roles, "carkeeper"));
+// console.log(!_.includes(roles, "carkeeper"));
 
 
 // var car_status = {

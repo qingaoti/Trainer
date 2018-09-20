@@ -99,6 +99,19 @@
             }
         };  //查询数据, 默认本月 和 类型是报名的
 
+        function fetchUtil(url){
+            var defer = Q.defer();
+            fetch(url).then(function(response){
+                if(response.status!==200){
+                    console.log("存在一个问题，状态码为："+response.status);
+                    return;
+                }
+                return response.json().then(function(data){
+                    return defer.resolve(data);
+                });
+            });
+            return defer.promise;
+        }
 
         $(function() {
             fetch("./data/ActEcharts.json").then(function(response){
@@ -123,6 +136,7 @@
                 _dealRatio = new canvas('dealRatio',"成交转化率","支付/成交");
 
                 _his.paint();
+
                 renderInfo();
 
                 _his.onLegendSelectChanged(function (params) {

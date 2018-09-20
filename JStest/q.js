@@ -23,11 +23,11 @@ var queue = [];
 queue.push("11111");
 queue.push("2222");
 queue.push("333");
-Q.all(queue)
-    .then(function(data){
-        console.log("返回1",data[0].toString());
-        console.log("返回2",data[1].toString());
-        console.log("返回3",data[2].toString());
-    },function(err){
-        console.log(err);
+    return Q.all.apply(null,queue).then(function(data){
+        // console.log("返回1",data[0].toString());
+        // console.log("返回2",data[1].toString());
+        // console.log("返回3",data[2].toString());
+        console.log(data);
+    }).then( rst =>{
+
     });
