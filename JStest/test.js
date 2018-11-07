@@ -3,6 +3,10 @@ var mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost/mytest');
 
+var id = mongoose.Types.ObjectId();
+
+console.log(id);
+
 var BlogSchema = new Schema({
     id        : {type : Number, index : true}
     ,title       : {type : String}

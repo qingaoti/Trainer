@@ -57,7 +57,7 @@ function calDiffMonths(StartDate, EndDate) {
     var CurrentMonth = StartDate.startOf('month');
     var Months = [];
     while (CurrentMonth <= EndDate) {
-        Months.push(CurrentMonth.format("YYYY/MM/DD"));
+        Months.push(CurrentMonth.format("YYYY-MM"));
         CurrentMonth = CurrentMonth.add(1, 'months');
     }
     return Months;
@@ -98,6 +98,10 @@ function carAgeFormat(age) {
 
 console.log("age返回",carAgeFormat("5-99"));
 console.log(calDiffMonths(moment("2016/12","YYYY/MM"),moment("2017/10","YYYY/MM")));
+
+let toDay = moment().format("YYYY/MM");
+console.log(toDay)
+console.log("最近一年月",calDiffMonths(moment(moment().subtract(1,'year'),"YYYY-MM"),moment(moment(),"YYYY-MM")) );
 
 var obj = [{
     "trend_date": "2018-03",

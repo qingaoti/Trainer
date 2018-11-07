@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<link href="lib/css/viewer.min.css" rel="stylesheet"/>
+<script src="lib/js/viewer.min.js"></script>
+<body>
+    <!-- a block container is required -->
+    <div>
+        <img id="image"
+             data-original="https://7-imgpub.51huanche.com/manage/3e1b2571de7011e8b7216718ae8c1da6?imageMogr2/thumbnail/390x&e=1541147031&token=vBgY4FtrytAhXESocWtDg8OuiNb1LKyKa81IHjqN:zn7sjnTVc8IDuyRY9UowruLtHj8="
+             src="https://7-imgpub.51huanche.com/manage/3e1b2571de7011e8b7216718ae8c1da6-normal"
+             alt="Picture"
+             style="width: 300px" />
+    </div>
+
+    <div>
+        <ul id="images">
+            <li><img src="img/tibet-1.jpg" alt="Picture 1"></li>
+        </ul>
+    </div>
+
+</body>
+</html>
+
+<script>
+    $(function() {
+
+        new Viewer(document.getElementById('image'), {
+            navbar:false,
+            url(img){
+                debugger;
+                return img.src;
+            }
+        });
+
+        const gallery = new Viewer(document.getElementById('images'));
+
+    });
+</script>

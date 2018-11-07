@@ -24,6 +24,23 @@ console.log("test_kong",test_kong);
 console.log("test_null",test_null);
 console.log("test_b",test_b);
 console.log("test_d",test_d);
+
+
+let numList = [1,2,3,4,5,6,7,8,9];
+console.log("循环测试");
+_.forEach(numList,(key,val) => {
+    if(key ==2){
+        console.log("2 这里 return true");
+        return true;
+    }
+   console.log(key);
+   // console.log(val);
+
+    if(key == 3){
+        return false;
+    }
+});
+
 //
 // if(!ling || ling < 0 ){
 //     console.log("进来了");

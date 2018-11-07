@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/croppie/2.6.2/croppie.js"></script>
+
+    <link rel="Stylesheet" href="https://cdn.bootcss.com/croppie/2.6.2/croppie.css" />
+    <style>
+        .actions button,
+        .actions a.btn {
+            background-color: #189094;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-shadow: none;
+        }
+        .actions button:focus {
+            outline: 0;
+        }
+
+        .actions .file-btn {
+            position: relative;
+        }
+        .actions .file-btn input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .actions {
+            padding: 5px 0;
+        }
+        .actions button {
+            margin-right: 5px;
+        }
+        .actions .crop{display:none}
+    </style>
+
+    <script>
+        $(function(){
+            var $uploadCrop;
+
+            function readFile(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $uploadCrop.croppie('bind', {
+                            url: e.target.result
+                        });
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else {
+                    alert("Sorry - you're browser doesn't support the FileReader API");
+                }
+            }
+
+            $uploadCrop = $('#upload-demo').croppie({
+                viewport: {
+                    width: 100,
+                    height: 100,
+                    type: 'square'
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                },
+                showZoomer: false,
+            });
+
+            $('#upload').on('change', function () {
+                $(".crop").show();
+                readFile(this);
+            });
+            $('.upload-result').on('click', function (ev) {
+                $uploadCrop.croppie('result', 'canvas').then(function (resp) {
+                    popupResult({
+                        src: resp
+                    });
+                });
+            });
+
+            function popupResult(result) {
+                var html;
+                if (result.html) {
+                    html = result.html;
+                }
+                if (result.src) {
+                    html = '<img src="' + result.src + '" />';
+                }
+                $("#result").html(html);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="actions">
+        <button class="file-btn">
+            <span>上传</span>
+            <input type="file" id="upload" value="选择图片文件" />
+        </button>
+        <div class="crop">
+            <div id="upload-demo"></div>
+            <button class="upload-result">裁剪</button>
+        </div>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
