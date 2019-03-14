@@ -5,10 +5,20 @@ var _ = require('lodash');
 //
 // if(rst.data.code != 200){
 //     throw new Error(rst.data.message);
-// }
+// }15:56
+var expiredTime = "2019-03-08T07:56:26.765Z";
+console.log("到现在",moment(expiredTime).diff(moment(), 'minutes'));
+
+console.log("当前时间",moment());
+
+console.log("取时年",moment("2018-12-04","YYYY-MM-DD").toArray())
+
+console.log("取时年",moment("2018-12-04","YYYY-MM-DD").day())
 
 console.log("效验时间格式",moment("2018-5", 'YYYY-MM').isValid());
 
+
+console.log("测试",moment().subtract(-1, 'hour'));
 
 // var obj = moment().startOf('day').toDate();
 

@@ -25,6 +25,25 @@ console.log("test_null",test_null);
 console.log("test_b",test_b);
 console.log("test_d",test_d);
 
+console.log("保留",_.round("0.005",2));
+if(_.round("0.005",2) <= 0){
+    console.log(1);
+}else{
+    console.log(2);
+}
+
+
+console.log("");
+
+console.log("是不是相等",_.isEqual("200","201"));
+
+console.log("降幅", (800 / 1000) *100);
+
+console.log("是否不在范围中", !_.inRange(71399 ,7.14*10000,7.77*10000) );
+
+console.log("测试金额大于0 true是失败", !_.toNumber(200) || _.toNumber(200) < 0 );
+
+console.log("相等测试",  eval("100" == 100) );
 
 let numList = [1,2,3,4,5,6,7,8,9];
 console.log("循环测试");
@@ -41,6 +60,85 @@ _.forEach(numList,(key,val) => {
     }
 });
 
+console.log("_.merge测试-------");
+let obj_merge ={
+    "final_payment" : 185546,
+    "pick_up_car_time" : "2018-03-09",
+    "deposit" : "54454",
+    "price" : 240000,
+    "attachment" : [
+        {
+            "ref" : "contract",
+            "text" : "定车协议",
+            "key" : "web3/af579d311d1a11e89f91a90e920b8575"
+        },
+        {
+            "ref" : "voucher",
+            "text" : "新车发票",
+            "key" : "web3/be7c91311d1a11e89f91a90e920b8575"
+        }
+    ]
+};
+
+let newObj_merge = {
+    "new_car_supplement": {
+        "title": "新车-补充资料",
+        "imgs": [],
+        "isOk": true,
+        "reasons": [
+            ""
+        ]
+    },
+    "new_car_invoice": {
+        "title": "新车-机动车发票",
+        "imgs": [
+            "manage/b1414681f20a11e8bf813337e1a1da47"
+        ],
+        "isOk": true,
+        "reasons": [
+            ""
+        ],
+        "new_car_invoice_date": "2018/11/23",
+        "new_car_invoice_number": "111111",
+        "new_car_invoice_code": "111111",
+        "new_car_owner_id_code": "11111111"
+    },
+    "new_car_certification": {
+        "title": "新车-机动车合格证/登记证书",
+        "imgs": [
+            "manage/acde88a1f20a11e8bf813337e1a1da47"
+        ],
+        "isOk": true,
+        "reasons": [
+            ""
+        ]
+    },
+    "new_car_contract": {
+        "title": "新车-机动车销售合同/协议",
+        "imgs": [
+            "manage/a8457881f20a11e8bf813337e1a1da47"
+        ],
+        "isOk": true,
+        "reasons": [
+            ""
+        ]
+    },
+    "new_car_client_id": {
+        "title": "新车-客户身份证",
+        "imgs": [
+            "manage/a3d462c1f20a11e8bf813337e1a1da47"
+        ],
+        "isOk": true,
+        "reasons": [
+            ""
+        ]
+    }
+}
+
+
+let testObj = _.merge(obj_merge.attachment,newObj_merge);
+
+console.log("_.merge测试-------结果:",testObj);
 //
 // if(!ling || ling < 0 ){
 //     console.log("进来了");
