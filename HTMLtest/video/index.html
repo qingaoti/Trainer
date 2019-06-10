@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript" src="ckplayer/ckplayer.js" charset="utf-8"></script>
+<body>
+    <div>
+        <div id="a1"></div>
+    </div>
+
+
+    <div class="index">
+        <input type="file" accept="video/*" id="video" name="video" onchange="uploadVideo()">
+        <video id="v1" src="" ></video>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    $(function () {
+        var flashvars={
+            p:1,
+            e:1
+        };
+        var video=['http://res.51huanche.com/video/test.mp4->video/mp4','http://www.ckplayer.com/webm/0.webm->video/webm','http://www.ckplayer.com/webm/0.ogv->video/ogg'];
+        var support=['all'];
+        CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
+    });
+
+   function  uploadVideo(e) {
+        var that = this;
+        var video = event.target.files[0];  //选择的文件
+        var reader = new FileReader();
+        var rs =  reader.readAsArrayBuffer(video);
+        reader.onload = (e) => {
+            let data
+            if (typeof e.target.result === 'object') {
+                data = window.URL.createObjectURL(new Blob([e.target.result]))
+            } else {
+                data = e.target.result
+            }
+            this.videoSrc= data;
+            console.log("视频地址" +data);
+            //提交到后台部分略
+
+            var flashvars={
+                p:1,
+                e:1
+            };
+            var video=[data];
+            var support=['all'];
+            CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
+        }
+    }
+
+
+</script>

@@ -11,6 +11,9 @@ console.log("到现在",moment(expiredTime).diff(moment(), 'minutes'));
 
 console.log("当前时间",moment());
 
+console.log("当前时间的美国时间",moment().utc().zone(8));
+
+
 console.log("取时年",moment("2018-12-04","YYYY-MM-DD").toArray())
 
 console.log("取时年",moment("2018-12-04","YYYY-MM-DD").day())
@@ -51,6 +54,7 @@ console.log("是不是之后",moment("2018-06-03").isAfter("2018-06-02"));
 
 //开始时间
 console.log("开始时间",moment("2018-06-03").format('YYYY-MM-DD HH:mm:ss'));
+
 //结束时间
 console.log("结束时间",moment("2018-06-03").add(1,'d').subtract(1,'seconds').format('YYYY-MM-DD HH:mm:ss'));
 
