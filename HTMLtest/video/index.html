@@ -28,35 +28,57 @@
             e:1
         };
         var video=['http://res.51huanche.com/video/test.mp4->video/mp4','http://www.ckplayer.com/webm/0.webm->video/webm','http://www.ckplayer.com/webm/0.ogv->video/ogg'];
+
         var support=['all'];
         CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
     });
 
-   function  uploadVideo(e) {
+   // function  uploadVideo(e) {
+   //      var that = this;
+   //      var video = event.target.files[0];  //选择的文件
+   //      var reader = new FileReader();
+   //      var rs =  reader.readAsArrayBuffer(video);
+   //      reader.onload = (e) => {
+   //          let data
+   //          if (typeof e.target.result === 'object') {
+   //              data = window.URL.createObjectURL(new Blob([e.target.result]))
+   //          } else {
+   //              data = e.target.result
+   //          }
+   //          this.videoSrc= data;
+   //          console.log("视频地址" +data);
+   //          //提交到后台部分略
+   //
+   //          var flashvars={
+   //              p:1,
+   //              e:1
+   //          };
+   //          var video=[data];
+   //          var support=['all'];
+   //          CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
+   //      }
+   //  }
+
+    //上传视频转为based4格式
+    function uploadVideo(e){
         var that = this;
         var video = event.target.files[0];  //选择的文件
         var reader = new FileReader();
-        var rs =  reader.readAsArrayBuffer(video);
+        var rs = reader.readAsDataURL(video);
         reader.onload = (e) => {
-            let data
-            if (typeof e.target.result === 'object') {
-                data = window.URL.createObjectURL(new Blob([e.target.result]))
-            } else {
-                data = e.target.result
-            }
-            this.videoSrc= data;
-            console.log("视频地址" +data);
+            var videoSrc = e.target.result;
+            console.log(videoSrc);
             //提交到后台部分略
-
             var flashvars={
                 p:1,
                 e:1
             };
-            var video=[data];
+            var video=[videoSrc];
             var support=['all'];
             CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
         }
     }
+
 
 
 </script>
