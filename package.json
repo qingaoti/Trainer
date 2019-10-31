@@ -18,7 +18,7 @@
     "lodash-decorators": "^4.5.0",
     "log4js": "1.1.0",
     "moment": "^2.22.1",
-    "mongoose": "^4.13.12",
+    "mongoose": "^5.7.7",
     "nodemailer": "^4.6.4",
     "nodemailer-smtp-transport": "^2.7.4",
     "object-assign": "^4.1.1",
