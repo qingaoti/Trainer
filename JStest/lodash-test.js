@@ -25,6 +25,8 @@ console.log("test_null",test_null);
 console.log("test_b",test_b);
 console.log("test_d",test_d);
 
+console.log("打印的随机数字:",_.random(999999999,100000000));
+
 console.log("保留",_.round("0.005",2));
 if(_.round("0.005",2) <= 0){
     console.log(1);

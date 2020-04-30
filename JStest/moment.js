@@ -6,8 +6,8 @@ var _ = require('lodash');
 // if(rst.data.code != 200){
 //     throw new Error(rst.data.message);
 // }15:56
-var expiredTime = "2019-03-08T07:56:26.765Z";
-console.log("到现在",moment(expiredTime).diff(moment(), 'minutes'));
+var expiredTime = "2020-01-22 07:05";
+console.log("到现在",(moment(expiredTime,'YYYY-MM-DD HH:mm:ss').diff() / 1000).toFixed(0));
 
 console.log("当前时间",moment());
 
@@ -38,7 +38,7 @@ console.log("测试",moment().subtract(-1, 'hour'));
 // console.log(moment("2017/10","YYYY/MM").startOf('month').format("YYYY/MM/DD"));
 
 var str = "2018年05月23日 11:51";
-console.log("ttt",moment(str,"YYYY年MM月DD日 HH:mm").format("yyyy-MM-dd"));
+console.log("ttt",moment(str,"yyyy年MM月DD日 HH:mm").format("YYYY-MM-DD"));
 
 
 console.log(moment().subtract(-60, 'days').format("YYYY/MM"));
