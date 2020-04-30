@@ -11,7 +11,8 @@ main();
 function main() {
     const g_cps = [];
     console.log(models);
-    return models.City.create({
+
+    return models.Trouble.create({
         name:"ceshi"
     },function (err,data) {
         console.log(data);
