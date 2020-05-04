@@ -7,7 +7,7 @@ module.exports = {
     },
     // 数据库配置
     MongoSettings: {
-        mongodb: "mongodb://10.5.24.141:27017/qingaoti",
+        mongodb: "mongodb://10.5.24.141:27017/demo",
         options: {
             keepAlive: 1,
             //socketTimeoutMS: 5000,
