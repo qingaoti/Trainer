@@ -46,12 +46,14 @@ module.exports = models = function (config) {
     require('./MessageModel.js');
     require('./NotificationModel.js');
     require('./TroubleModel.js');
+    require('./ProcModel.js');
 
     models.City = mongoose.model('City');
     models.Message = mongoose.model('Message');
     models.Notification = mongoose.model("Notification");
     models.erCar = mongoose.model("erCar");
     models.Trouble = mongoose.model("Trouble");
+    models.Proc = mongoose.model("Proc");
 
     models.middleware = function (req, res, next) {
         req.models = models;

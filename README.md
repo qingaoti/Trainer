@@ -49,3 +49,20 @@ npm install -g mysql
 sequelize-auto -o "./app/model" -d egg -h 10.5.24.143 -u root -p 3306 -x secret -e mysql -C
 ```
 
+### 索引
+```
+创建索引
+
+1.单键索引的创建：db.test.ensureIndex({name:1},{name:'index_name'})
+
+2.复合索引的创建：db.test.ensureIndex({name:1,age:1,sex:1},{name:'index_nas'})
+
+//查询当前文档的索引
+db.CollectionName.getIndexes()
+
+//查询当前库的所有索引
+db.system.indexes.find()
+
+//执行计划
+db.test.ensureIndex({name:1},{name:'index_name'})
+```
