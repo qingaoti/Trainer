@@ -67,7 +67,7 @@ db.system.indexes.find()
 db.test.ensureIndex({name:1},{name:'index_name'})
 
 //分析索引
-explain(queryPlanner) 
-explain(executionStats)
-explain(allPlansExecution)
+explain('queryPlanner') 
+explain('executionStats')
+explain('allPlansExecution')
 ```
