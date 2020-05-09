@@ -23,6 +23,5 @@ auto.run(function (err) {
 	})
 
 
-sequelize-auto -o "./models" -d sequelize_auto_test -h localhost -u my_username -p 5432 -x my_password -e postgres
 
-sequelize-auto -h 192.168.31.77 -d egg -u root -x xxxxxx -p 3307 -o "./models" -C
+// sequelize-auto -h 192.168.31.77 -d egg -u root -x xxxxxx -p 3307 -o "./models" -C
