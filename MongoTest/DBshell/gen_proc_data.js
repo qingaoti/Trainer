@@ -4,14 +4,14 @@ const _ = require('lodash');
 const Q = require("q");
 const moment = require('moment');
 
-const gen_Num = 10000000; // 要循环的次数值
+const gen_Num = 10000; // 要循环的次数值
 
 main().then(r => console.log("main done"));
 
 async function main () {
     let startTime = moment().format('YYYY-MM-DD HH:mm:ss');
     console.log("开始时间："+ startTime);
-    let runNum = 5000;  //循环一次最多次数；
+    let runNum = 1000;  //循环一次最多次数；
     let runCount = gen_Num / runNum ;  // 总数量/跑的一次最多的数量  = while分批的数量
 
     let i = 0;
@@ -40,7 +40,7 @@ async function main () {
 function getRandomProc(gen_count) {
     const baseProc = {
         proc_id: "",   // 工单id
-        inspection_area_id: "",   // 巡检区域id
+        inspection_area_id: "10",   // 巡检区域id
         inspection_area_name: "",  // 巡检区域名称
         inspection_task_id: "asdfsds112121213", //巡检任务id
         inspection_start_time: 1588581420272,  //巡检开始时间
