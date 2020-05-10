@@ -32,6 +32,23 @@ const TroubleSchema = new mongoose.Schema({
     isDelete: Number, //是否删除
     createUser: String, //创建用户
     updateUser: String, //修改用户
+    // ---------相关信息--------------//
+    staff : [{     // 人员调配
+        staffId: {type: String},    //人员ID
+        staffName: {type: String},  //人员名称
+        staffPosition: {type: String}  //人员的职位
+    }],
+    vehicle : [{    // 车辆调配
+        vehicleId: {type: String},     //车辆ID
+        vehicleName: {type: String},   //车辆名称
+        numberPlate: {type: String}    //车牌
+    }],
+    asset : [{    // 资产调配
+        assetId: {type: String},   //资产ID
+        assetName: {type: String}, //资产名称
+        assetCode: {type: String}  //资产编号
+    }]
+    // ---------相关信息--------------//
 }, {
     versionKey: false,
     timestamps: {createdAt: 'createTime', updatedAt: 'updateTime'}
